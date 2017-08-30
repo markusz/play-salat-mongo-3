@@ -3,16 +3,17 @@ import sbt.Keys._
 
 object ProjectBuild extends Build {
 
-  lazy val buildVersion =  "1.5.9"
+  lazy val buildVersion =  "0.9"
 
   lazy val root = Project(id = "play-salat-mongo-3", base = file("."), settings = Project.defaultSettings ++ Publish.settings).settings(
     organization := "de.markusziller",
     description := "Forked MongoDB Salat plugin for PlayFramework 2 - Adapted to work with MongoDB 3.0.6, a very common version of MongoDB that caused problem for this plugin ",
     version := buildVersion,
-    scalaVersion := "2.11.7",
+    scalaVersion := "2.10.4",
     scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature"),
     parallelExecution in Test := false,
     testFrameworks += TestFrameworks.Specs2,
+    sbtPlugin := true,
 
     resolvers ++= Seq(
       "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases",
@@ -42,6 +43,7 @@ object Publish {
       else
         Some("sonatype releases"  at nexus + "service/local/staging/deploy/maven2")
     },
+    credentials += Credentials(Path.userHome / ".sbt" / ".credentials"),
     publishArtifact in Test := false,
     pomIncludeRepository := { _ => false },
     licenses := Seq("Apache 2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
@@ -57,6 +59,7 @@ object Publish {
           <name>Markus Ziller</name>
           <url>http://github.com/markusz</url>
         </developer>
-      </developers>)
+      </developers>
+      )
   )
 }
