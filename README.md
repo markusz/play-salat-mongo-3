@@ -30,7 +30,7 @@ It will ask you a couple of questions, and your ready to rock 'n roll.
 Start by adding the plugin, in your `project/Build.scala`
 ````scala
 val appDependencies = Seq(
-  "net.cloudinsights" %% "play-plugins-salat" % "1.5.9"
+  "de.markusziller" %% "play-salat-mongo-3" % "0.9"
 )
 ````
 Then we can add the implicit converstions to and from ObjectId by adding to the routesImport and add ObjectId to all the templates
